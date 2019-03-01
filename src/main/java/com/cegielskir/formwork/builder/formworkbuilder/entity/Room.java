@@ -65,4 +65,14 @@ public class Room {
     public void setFormwork(Formwork formwork) {
         this.formwork = formwork;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", len=" + len +
+                ", wid=" + wid +
+                ", formwork=" + formwork +
+                '}';
+    }
 }

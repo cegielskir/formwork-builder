@@ -66,4 +66,14 @@ public class GirderSet {
     public void setFormwork(Formwork formwork) {
         this.formwork = formwork;
     }
+
+    @Override
+    public String toString() {
+        return "GirderSet{" +
+                "id=" + id +
+                ", len=" + len +
+                ", quantity=" + quantity +
+                ", formwork=" + formwork +
+                '}';
+    }
 }

@@ -98,4 +98,16 @@ public class Formwork {
     public List<GirderSet> getGirderSets() {
         return girderSets;
     }
+
+    @Override
+    public String toString() {
+        return "Formwork{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", create_date=" + create_date +
+                ", info='" + info + '\'' +
+                ", rooms=" + rooms +
+                ", girderSets=" + girderSets +
+                '}';
+    }
 }
