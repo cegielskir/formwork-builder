@@ -1,14 +1,13 @@
-package com.cegielskir.formwork.builder.formworkbuilder.dao.impl;
+package com.cegielskir.formwork.builder.dao.impl;
 
-import com.cegielskir.formwork.builder.formworkbuilder.dao.FormworkDAO;
-import com.cegielskir.formwork.builder.formworkbuilder.entity.Formwork;
+import com.cegielskir.formwork.builder.dao.FormworkDAO;
+import com.cegielskir.formwork.builder.entity.Formwork;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class FormworkDAOImpl implements FormworkDAO{
 
     @Autowired
     public FormworkDAOImpl(EntityManager theEntityManager) {
-        this.entityManager = entityManager;
+        this.entityManager = theEntityManager;
     }
 
     @Override

@@ -1,13 +1,12 @@
-package com.cegielskir.formwork.builder.formworkbuilder.dao.impl;
+package com.cegielskir.formwork.builder.dao.impl;
 
-import com.cegielskir.formwork.builder.formworkbuilder.dao.RoomDAO;
-import com.cegielskir.formwork.builder.formworkbuilder.entity.Room;
+import com.cegielskir.formwork.builder.dao.RoomDAO;
+import com.cegielskir.formwork.builder.entity.Room;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -16,7 +15,7 @@ public class RoomDAOImpl implements RoomDAO{
 
     @Autowired
     public RoomDAOImpl(EntityManager theEntityManager) {
-        this.entityManager = entityManager;
+        this.entityManager = theEntityManager;
     }
 
     @Override

@@ -1,8 +1,8 @@
-package com.cegielskir.formwork.builder.formworkbuilder.service.impl;
+package com.cegielskir.formwork.builder.service.impl;
 
-import com.cegielskir.formwork.builder.formworkbuilder.dao.RoomDAO;
-import com.cegielskir.formwork.builder.formworkbuilder.entity.Room;
-import com.cegielskir.formwork.builder.formworkbuilder.service.RoomService;
+import com.cegielskir.formwork.builder.dao.RoomDAO;
+import com.cegielskir.formwork.builder.entity.Room;
+import com.cegielskir.formwork.builder.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

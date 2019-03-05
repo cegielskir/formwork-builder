@@ -1,6 +1,6 @@
-package com.cegielskir.formwork.builder.formworkbuilder.dao;
+package com.cegielskir.formwork.builder.dao;
 
-import com.cegielskir.formwork.builder.formworkbuilder.entity.Formwork;
+import com.cegielskir.formwork.builder.entity.Formwork;
 
 import java.util.List;
 

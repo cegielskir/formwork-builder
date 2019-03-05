@@ -1,4 +1,4 @@
-package com.cegielskir.formwork.builder.formworkbuilder.entity;
+package com.cegielskir.formwork.builder.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;

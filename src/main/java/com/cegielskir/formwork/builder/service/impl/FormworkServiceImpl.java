@@ -1,8 +1,8 @@
-package com.cegielskir.formwork.builder.formworkbuilder.service.impl;
+package com.cegielskir.formwork.builder.service.impl;
 
-import com.cegielskir.formwork.builder.formworkbuilder.dao.FormworkDAO;
-import com.cegielskir.formwork.builder.formworkbuilder.entity.Formwork;
-import com.cegielskir.formwork.builder.formworkbuilder.service.FormworkService;
+import com.cegielskir.formwork.builder.dao.FormworkDAO;
+import com.cegielskir.formwork.builder.entity.Formwork;
+import com.cegielskir.formwork.builder.service.FormworkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class FormworkServiceImpl implements FormworkService{
+public class FormworkServiceImpl implements FormworkService {
 
     @Autowired
     FormworkDAO formworkDAO;

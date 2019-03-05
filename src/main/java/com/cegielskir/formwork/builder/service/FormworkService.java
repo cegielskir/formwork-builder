@@ -1,6 +1,6 @@
-package com.cegielskir.formwork.builder.formworkbuilder.service;
+package com.cegielskir.formwork.builder.service;
 
-import com.cegielskir.formwork.builder.formworkbuilder.entity.Formwork;
+import com.cegielskir.formwork.builder.entity.Formwork;
 
 import java.util.List;
 

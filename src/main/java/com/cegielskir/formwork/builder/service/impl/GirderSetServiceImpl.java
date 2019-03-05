@@ -1,8 +1,8 @@
-package com.cegielskir.formwork.builder.formworkbuilder.service.impl;
+package com.cegielskir.formwork.builder.service.impl;
 
-import com.cegielskir.formwork.builder.formworkbuilder.dao.GirderSetDAO;
-import com.cegielskir.formwork.builder.formworkbuilder.entity.GirderSet;
-import com.cegielskir.formwork.builder.formworkbuilder.service.GirderSetService;
+import com.cegielskir.formwork.builder.dao.GirderSetDAO;
+import com.cegielskir.formwork.builder.entity.GirderSet;
+import com.cegielskir.formwork.builder.service.GirderSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class GirderSetServiceImpl implements GirderSetService{
+public class GirderSetServiceImpl implements GirderSetService {
 
     @Autowired
     GirderSetDAO girderSetDAO;

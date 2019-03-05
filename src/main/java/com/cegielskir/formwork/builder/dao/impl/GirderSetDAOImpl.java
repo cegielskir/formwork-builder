@@ -1,14 +1,13 @@
-package com.cegielskir.formwork.builder.formworkbuilder.dao.impl;
+package com.cegielskir.formwork.builder.dao.impl;
 
-import com.cegielskir.formwork.builder.formworkbuilder.dao.GirderSetDAO;
-import com.cegielskir.formwork.builder.formworkbuilder.entity.GirderSet;
+import com.cegielskir.formwork.builder.dao.GirderSetDAO;
+import com.cegielskir.formwork.builder.entity.GirderSet;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -17,7 +16,7 @@ public class GirderSetDAOImpl implements GirderSetDAO {
 
     @Autowired
     public GirderSetDAOImpl(EntityManager theEntityManager) {
-        this.entityManager = entityManager;
+        this.entityManager = theEntityManager;
     }
 
     @Override

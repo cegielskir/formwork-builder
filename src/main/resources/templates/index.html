@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Demo</title>
+</head>
+
+<body>
+<br><br>
+
+<a th:href="@{/formwork/add}">
+    Add Formwork
+</a>
+
+    <table border = "1">
+        <thead>
+            <tr>
+                <th>Formwork Name</th>
+                <th>Create Date</th>
+                <th>Info</th>
+                <th>Is Solved</th>
+                <th>Details</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tempFormwork : ${formworks}">
+                <td th:text="${tempFormwork.name}"></td>
+                <td th:text="${#dates.format(tempFormwork.createDate, 'dd-MM-yyyy')}"></td>
+                <td th:text="${tempFormwork.info}"></td>
+                <td th:text="${tempFormwork.isSolved()}"></td>
+                <td>
+                    <a th:href="@{/formwork/details(formworkId=${tempFormwork.id})}"></a>
+                </td>
+                <td>
+                    <a th:href="@{/formwork/delete(formworkId=${tempFormwork.id})}"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

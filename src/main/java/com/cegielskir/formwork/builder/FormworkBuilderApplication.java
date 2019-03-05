@@ -1,4 +1,4 @@
-package com.cegielskir.formwork.builder.formworkbuilder;
+package com.cegielskir.formwork.builder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

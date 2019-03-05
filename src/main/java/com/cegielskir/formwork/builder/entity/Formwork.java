@@ -1,5 +1,8 @@
-package com.cegielskir.formwork.builder.formworkbuilder.entity;
+package com.cegielskir.formwork.builder.entity;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -20,25 +23,36 @@ public class Formwork {
     private String name;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="departure_date")
-    private Date create_date;
+    @Column(name="create_date")
+    private Date createDate;
 
     @Column(name = "info")
     private String info;
 
-    @OneToMany(mappedBy = "formwork_id",
+    @OneToMany(mappedBy = "formwork",
                 cascade = {CascadeType.ALL})
+    @Column(name = "rooms")
     private List<Room> rooms;
 
-    @OneToMany(mappedBy = "formwork_id",
+    @OneToMany(mappedBy = "formwork",
                 cascade = {CascadeType.ALL})
+    @Column(name = "girder_sets")
     private List<GirderSet> girderSets;
 
-    public Formwork() {}
+    @Column(name = "solution")
+    private String solution;
+
+    @Column(name = "is_solved")
+    private boolean isSolved;
+
+    public Formwork() {
+        this.createDate =  new Date(System.currentTimeMillis());
+        this.solution = null;
+        this.isSolved = false;
+    }
 
     public Formwork(@NotNull String name) {
         this.name = name;
-        this.create_date =  new Date(System.currentTimeMillis());
     }
 
     public int getId() {
@@ -57,12 +71,12 @@ public class Formwork {
         this.name = name;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date create_date) {
+        this.createDate = create_date;
     }
 
     public String getInfo() {
@@ -71,6 +85,22 @@ public class Formwork {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
+    }
+
+    public boolean isSolved() {
+        return isSolved;
+    }
+
+    public void setSolved(boolean solved) {
+        isSolved = solved;
     }
 
     public void addRoom(Room room){
@@ -104,10 +134,12 @@ public class Formwork {
         return "Formwork{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", create_date=" + create_date +
+                ", create_date=" + createDate +
                 ", info='" + info + '\'' +
                 ", rooms=" + rooms +
                 ", girderSets=" + girderSets +
+                ", solution=" + solution +
+                ", isSolved=" + isSolved +
                 '}';
     }
 }
