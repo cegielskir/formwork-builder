@@ -1,0 +1,3 @@
+Web application which is able to make the most optimal project of ceiling formwork (uses as few girders as possible) and provides result as a raw text or as JSON via RESTful API. 
+
+Under development ...
