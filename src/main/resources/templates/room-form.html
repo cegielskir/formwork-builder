@@ -11,8 +11,8 @@
 <form action ="#" th:action="@{/room/save(formworkId=${formwork.id})}"
       th:object="${room}" method="POST">
 
-    <input type="text" th:field="*{len}" placeholder="Room length">
-    <input type="text" th:field="*{wid}">
+    <input type="text" th:field="*{len}" th:placeholder="Room length">
+    <input type="text" th:field="*{wid}" th:placeholder="Room width">
 
     <button type="submit">Save</button>
 

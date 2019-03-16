@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Girder Set Form</title>
+</head>
+
+<body>
+<br><br>
+
+<form action ="#" th:action="@{/girderSet/save(formworkId=${formwork.id})}"
+      th:object="${girderSet}" method="POST">
+
+    <input type="text" th:field="*{len}" placeholder="Room length">
+    <input type="text" th:field="*{quantity}" placeholder="Quantity">
+
+    <button type="submit">Save</button>
+
+</form>
+</body>
+</html>

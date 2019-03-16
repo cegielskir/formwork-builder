@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thymeleaf Demo</title>
+    <title>Formwork Details</title>
 </head>
 
 <body>
@@ -30,6 +30,34 @@
         <td>
             <a th:href="@{/room/delete(formworkId=${formwork.id},
                             roomId=${tempRoom.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br><br><br><br>
+<a th:href="@{/girderSet/add(formworkId=${formwork.id})}">
+    Add Girder Set
+</a>
+
+<table border = "1">
+    <thead>
+    <tr>
+        <th>GirderSet Id</th>
+        <th>Length</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempGirderSet : ${girderSets}">
+        <td th:text="${tempGirderSet.id}"></td>
+        <td th:text="${tempGirderSet.len}"></td>
+        <td th:text="${tempGirderSet.quantity}"></td>
+        <td>
+            <a th:href="@{/girderSet/delete(formworkId=${formwork.id},
+                            girderSetId=${tempGirderSet.id})}">Delete</a>
         </td>
     </tr>
     </tbody>
