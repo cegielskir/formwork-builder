@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Demo</title>
+</head>
+
+<body>
+<br><br>
+
+<a th:href="@{/room/add(formworkId=${formwork.id})}">
+    Add Room
+</a>
+
+<table border = "1">
+    <thead>
+    <tr>
+        <th>Room Id</th>
+        <th>Length</th>
+        <th>Width</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempRoom : ${rooms}">
+        <td th:text="${tempRoom.id}"></td>
+        <td th:text="${tempRoom.len}"></td>
+        <td th:text="${tempRoom.wid}"></td>
+        <td>
+            <a th:href="@{/room/delete(formworkId=${formwork.id},
+                            roomId=${tempRoom.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

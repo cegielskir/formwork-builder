@@ -121,6 +121,14 @@ public class Formwork {
         girderSet.setFormwork(this);
     }
 
+    public void deleteRoom(Room room){
+        this.rooms.remove(room);
+    }
+
+    public void deleteGirderSet(GirderSet girderSet){
+        this.girderSets.remove(girderSet);
+    }
+
     public List<Room> getRooms() {
         return rooms;
     }

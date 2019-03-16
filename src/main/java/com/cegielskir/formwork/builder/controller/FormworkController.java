@@ -57,16 +57,17 @@ public class FormworkController {
         }
     }
 
-    @GetMapping("/deleteFormwork")
+    @GetMapping("/delete")
     public String delete(@RequestParam("formworkId") int id, Model model){
         formworkService.delete(id);
 
         return "redirect:/formwork/list";
     }
 
-    @GetMapping("/details")
-    public String getDetails(@RequestParam("formoworkId") int id, Model model){
+    @GetMapping("/details/{formworkId}")
+    public String getDetails(@PathVariable("formworkId") int id, Model model){
         Formwork formwork = formworkService.getById(id);
+        model.addAttribute("formwork",formwork);
         model.addAttribute("rooms",formwork.getRooms());
         model.addAttribute("girderSets", formwork.getGirderSets());
         return "show-details";

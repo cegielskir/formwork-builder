@@ -31,10 +31,10 @@
                 <td th:text="${tempFormwork.info}"></td>
                 <td th:text="${tempFormwork.isSolved()}"></td>
                 <td>
-                    <a th:href="@{/formwork/details(formworkId=${tempFormwork.id})}"></a>
+                    <a th:href="@{'/formwork/details/'+${tempFormwork.id}}">Details</a>
                 </td>
                 <td>
-                    <a th:href="@{/formwork/delete(formworkId=${tempFormwork.id})}"></a>
+                    <a th:href="@{/formwork/delete(formworkId=${tempFormwork.id})}">Delete</a>
                 </td>
             </tr>
         </tbody>

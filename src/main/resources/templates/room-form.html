@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Demo</title>
+</head>
+
+<body>
+<br><br>
+
+<form action ="#" th:action="@{/room/save(formworkId=${formwork.id})}"
+      th:object="${room}" method="POST">
+
+    <input type="text" th:field="*{len}" placeholder="Room length">
+    <input type="text" th:field="*{wid}">
+
+    <button type="submit">Save</button>
+
+</form>
+</body>
+</html>

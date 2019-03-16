@@ -35,6 +35,7 @@ public class RoomDAOImpl implements RoomDAO{
     public void delete(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
         Room room = currentSession.load(Room.class, id);
+        currentSession.delete(room);
 
     }
 
