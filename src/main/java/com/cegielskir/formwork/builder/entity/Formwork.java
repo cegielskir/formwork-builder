@@ -45,6 +45,10 @@ public class Formwork {
     @Column(name = "is_solved")
     private boolean isSolved;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "formwork_project_id")
+    private FormworkProject formworkProject;
+
     public Formwork() {
         this.createDate =  new Date(System.currentTimeMillis());
         this.solution = null;
@@ -135,6 +139,23 @@ public class Formwork {
 
     public List<GirderSet> getGirderSets() {
         return girderSets;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public void setGirderSets(List<GirderSet> girderSets) {
+        this.girderSets = girderSets;
+    }
+
+    public FormworkProject getFormworkProject() {
+        return formworkProject;
+    }
+
+    public void setFormworkProject(FormworkProject formworkProject) {
+        this.formworkProject = formworkProject;
+        this.formworkProject.setFormwork(this);
     }
 
     @Override
