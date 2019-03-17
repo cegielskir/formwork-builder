@@ -36,13 +36,17 @@ public class RoomController {
     public String saveRoom(@Valid @ModelAttribute("room") Room room,
                                @RequestParam("formworkId") int formworkId,
                                BindingResult bindingResult){
+        Room correctRoom = room;
         if(bindingResult.hasErrors()){
             return "room-form";
         } else {
+            if(room.getLen() < room.getWid()){
+                correctRoom = new Room(room.getWid(), room.getLen());
+            }
             Formwork formwork = formworkService.getById(formworkId);
-            formwork.addRoom(room);
+            formwork.addRoom(correctRoom);
             formworkService.add(formwork);
-            roomService.add(room);
+            roomService.add(correctRoom);
             return "redirect:/formwork/details/" + formworkId;
         }
     }
