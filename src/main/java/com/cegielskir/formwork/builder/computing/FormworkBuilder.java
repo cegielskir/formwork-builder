@@ -1,81 +1,70 @@
 package com.cegielskir.formwork.builder.computing;
 
+import com.cegielskir.formwork.builder.entity.FormworkProject;
 import com.cegielskir.formwork.builder.entity.GirderSet;
 import com.cegielskir.formwork.builder.entity.Room;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
-public class FormworkBuilder implements Runnable{
-
+public class FormworkBuilder{
 
     private Formwork formwork;
-    private boolean isBetterOptionAvailable = true;
+    private boolean isBetterSolutionAvailable = true;
     private boolean isBetterSolutionCalculated = false;
     private String resultJSON = null;
 
-    public FormworkBuilder(List<Room> rooms, List<GirderSet> girderSets) {
+    public FormworkBuilder(List<Room> rooms, List<GirderSet> girderSets, FormworkProject formworkProject) {
         this.formwork = new Formwork();
         this.formwork.addGirderSets(girderSets);
         this.formwork.addRooms(rooms);
+        this.isBetterSolutionCalculated = formworkProject.getIsBetterSolutionCalculated();
+        this.isBetterSolutionAvailable = formworkProject.getIsBetterSolutionAvailable();
+        this.formwork.setMaxLeft(formworkProject.getMaxLeftGirders());
+        this.formwork.setMaxLeftValue(formworkProject.getMaxLeftGirdersValue());
+        this.formwork.setDistance(formworkProject.getFormworkProjectDetails().getDistance());
+        this.formwork.setAccuracy(formworkProject.getFormworkProjectDetails().getAccuracy());
+        this.formwork.setOneUpperGirderDistance(formworkProject.getFormworkProjectDetails().getOneUpperGirderDistance());
+        this.formwork.setOverlapDistance(formworkProject.getFormworkProjectDetails().getOverlapDistance());
+        this.formwork.setUpperExtraDistance(formworkProject.getFormworkProjectDetails().getUpperExtraDistance());
+
     }
 
-    @Override
-    public void run() {
+
+
+
+    public FormworkProject calculateSolution() {
         try {
 
             HashMap<Float, Integer> res = null;
 
-            if (isBetterOptionAvailable) {
+            if (isBetterSolutionAvailable) {
                 //TODO simple first execution of method 'build' without so many args
                 res= formwork.build(formwork.getGirders(), true, 0,
                         0, 0, false, true);
                 if (res != null) {
-                    setBetterSolutionCalculated(true);
+                    isBetterSolutionCalculated = true;
                 } else {
-                    setBetterOptionAvailable(false);
+                    isBetterSolutionAvailable = false;
                 }
             }
 
             ObjectMapper mapper = new ObjectMapper();
             this.resultJSON = mapper.writeValueAsString(formwork.getFinalFormwork().values());
 
+            FormworkProject formworkProject = new FormworkProject();
+            formworkProject.setIsBetterSolutionAvailable(this.isBetterSolutionAvailable);
+            formworkProject.setIsBetterSolutionCalculated(this.isBetterSolutionCalculated);
+            formworkProject.setMaxLeftGirders(this.formwork.getMaxLeft());
+            formworkProject.setMaxLeftGirdersValue(this.formwork.getMaxLeftValue());
+            formworkProject.setResultJSON(this.resultJSON);
+            return formworkProject;
 
         } catch (Exception ex){
             ex.printStackTrace();
         }
-
-    }
-
-    public synchronized boolean isBetterOptionAvailable() {
-        return isBetterOptionAvailable;
-    }
-
-    public synchronized boolean isBetterSolutionCalculated() {
-        return isBetterSolutionCalculated;
-    }
-
-    public synchronized String getResultJSON() {
-        return resultJSON;
-    }
-
-    public synchronized void setBetterOptionAvailable(boolean betterOptionAvailable) {
-        isBetterOptionAvailable = betterOptionAvailable;
-    }
-
-    public synchronized void setBetterSolutionCalculated(boolean betterSolutionCalculated) {
-        isBetterSolutionCalculated = betterSolutionCalculated;
-    }
-
-    public synchronized void setResultJSON(String resultJSON) {
-        this.resultJSON = resultJSON;
-    }
-
-    public void calculateSolution() {
-        Thread t = new Thread(this);
-        t.start();
+        return null;
     }
 
         //IMPORTANT

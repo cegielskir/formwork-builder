@@ -1,6 +1,11 @@
 package com.cegielskir.formwork.builder.controller;
 
+import com.cegielskir.formwork.builder.computing.ComputingManager;
 import com.cegielskir.formwork.builder.entity.Formwork;
+import com.cegielskir.formwork.builder.entity.FormworkProject;
+import com.cegielskir.formwork.builder.entity.FormworkProjectDetails;
+import com.cegielskir.formwork.builder.service.FormworkProjectDetailsService;
+import com.cegielskir.formwork.builder.service.FormworkProjectService;
 import com.cegielskir.formwork.builder.service.FormworkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
@@ -17,12 +22,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/formwork")
 public class FormworkController {
 
     @Autowired
     FormworkService formworkService;
+
+    @Autowired
+    FormworkProjectService formworkProjectService;
+
+    @Autowired
+    FormworkProjectDetailsService formworkProjectDetailsService;
 
 
     @GetMapping("/list")
@@ -52,6 +63,12 @@ public class FormworkController {
         } else {
             System.out.println("In save Formwork");
 
+            FormworkProject formworkProject = new FormworkProject();
+            FormworkProjectDetails formworkProjectDetails = new FormworkProjectDetails();
+            formworkProject.setFormworkProjectDetails(formworkProjectDetails);
+            formwork.setFormworkProject(formworkProject);
+            formworkProjectService.add(formworkProject);
+            formworkProjectDetailsService.add(formworkProjectDetails);
             formworkService.add(formwork);
             return "redirect:/formwork/list";
         }
@@ -71,6 +88,21 @@ public class FormworkController {
         model.addAttribute("rooms",formwork.getRooms());
         model.addAttribute("girderSets", formwork.getGirderSets());
         return "show-details";
+    }
+
+    @GetMapping("/solution/{formworkId}")
+    public String getSolution(@PathVariable("formworkId") int id, Model model){
+        Formwork formwork = formworkService.getById(id);
+        return formwork.getFormworkProject().getResultJSON();
+    }
+
+    @GetMapping("/compute/{formworkId}")
+    public String computeNewSolution(@PathVariable("formworkId") int id, Model model){
+        Formwork formwork = formworkService.getById(id);
+        formwork.getFormworkProject().setIsBetterSolutionCalculated(false);
+        Thread thread = new Thread(new ComputingManager(formwork, formworkProjectService, formworkService));
+        thread.start();
+        return "redirect:/formwork/list";
     }
 
     @InitBinder

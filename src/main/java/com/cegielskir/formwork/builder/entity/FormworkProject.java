@@ -8,7 +8,7 @@ public class FormworkProject{
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "max_left_girders")
@@ -18,24 +18,30 @@ public class FormworkProject{
     private int maxLeftGirdersValue;
 
     @Column(name = "is_better_solution_available")
-    private int isBetterSolutionAvailable;
+    private boolean isBetterSolutionAvailable;
 
     @Column(name = "is_better_solution_calculated")
-    private int isBetterSolutionCalculated;
+    private boolean isBetterSolutionCalculated;
 
     @Column(name = "result_json")
     private String resultJSON;
 
-    @OneToOne(mappedBy = "formwork_project", cascade = {CascadeType.ALL})
+    @OneToOne(mappedBy = "formworkProject", cascade = {CascadeType.ALL})
     private Formwork formwork;
 
-    @OneToOne(mappedBy = "formwork_project", cascade = {CascadeType.ALL})
+    @OneToOne(mappedBy = "formworkProject", cascade = {CascadeType.ALL})
     private FormworkProjectDetails formworkProjectDetails;
 
-    public FormworkProject() {}
+    public FormworkProject() {
+        this.maxLeftGirders = -1;
+        this.maxLeftGirdersValue = -1;
+        this.isBetterSolutionAvailable = true;
+        this.isBetterSolutionCalculated = false;
+        this.resultJSON = null;
+    }
 
-    public FormworkProject(int maxLeftGirders, int maxLeftGirdersValue, int isBetterSolutionAvailable,
-                           int isBetterSolutionCalculated, String resultJSON) {
+    public FormworkProject(int maxLeftGirders, int maxLeftGirdersValue, boolean isBetterSolutionAvailable,
+                           boolean isBetterSolutionCalculated, String resultJSON) {
         this.maxLeftGirders = maxLeftGirders;
         this.maxLeftGirdersValue = maxLeftGirdersValue;
         this.isBetterSolutionAvailable = isBetterSolutionAvailable;
@@ -67,19 +73,19 @@ public class FormworkProject{
         this.maxLeftGirdersValue = maxLeftGirdersValue;
     }
 
-    public int getIsBetterSolutionAvailable() {
+    public boolean getIsBetterSolutionAvailable() {
         return isBetterSolutionAvailable;
     }
 
-    public void setIsBetterSolutionAvailable(int isBetterSolutionAvailable) {
+    public void setIsBetterSolutionAvailable(boolean isBetterSolutionAvailable) {
         this.isBetterSolutionAvailable = isBetterSolutionAvailable;
     }
 
-    public int getIsBetterSolutionCalculated() {
+    public boolean getIsBetterSolutionCalculated() {
         return isBetterSolutionCalculated;
     }
 
-    public void setIsBetterSolutionCalculated(int isBetterSolutionCalculated) {
+    public void setIsBetterSolutionCalculated(boolean isBetterSolutionCalculated) {
         this.isBetterSolutionCalculated = isBetterSolutionCalculated;
     }
 
@@ -120,5 +126,14 @@ public class FormworkProject{
                 ", isBetterSolutionCalculated=" + isBetterSolutionCalculated +
                 ", resultJSON='" + resultJSON + '\'' +
                 '}';
+    }
+
+
+    public void setAllFields(FormworkProject formworkProject){
+        this.setMaxLeftGirdersValue(formworkProject.getMaxLeftGirdersValue());
+        this.setMaxLeftGirders(formworkProject.getMaxLeftGirders());
+        this.setIsBetterSolutionCalculated(formworkProject.getIsBetterSolutionCalculated());
+        this.setIsBetterSolutionAvailable(formworkProject.getIsBetterSolutionAvailable());
+        this.setResultJSON(formworkProject.getResultJSON());
     }
 }

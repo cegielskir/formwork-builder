@@ -88,6 +88,22 @@ public class Formwork {
         this.overlapDistance = overlapDistance;
     }
 
+    public int getMaxLeft() {
+        return maxLeft;
+    }
+
+    public void setMaxLeft(int maxLeft) {
+        this.maxLeft = maxLeft;
+    }
+
+    public int getMaxLeftValue() {
+        return maxLeftValue;
+    }
+
+    public void setMaxLeftValue(int maxLeftValue) {
+        this.maxLeftValue = maxLeftValue;
+    }
+
     public float getOneUpperGirderDistance() {
         return oneUpperGirderDistance;
     }

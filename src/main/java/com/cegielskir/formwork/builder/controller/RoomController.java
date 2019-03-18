@@ -45,8 +45,10 @@ public class RoomController {
             }
             Formwork formwork = formworkService.getById(formworkId);
             formwork.addRoom(correctRoom);
+            System.out.println("Here1");
             formworkService.add(formwork);
             roomService.add(correctRoom);
+            System.out.println("Here2");
             return "redirect:/formwork/details/" + formworkId;
         }
     }

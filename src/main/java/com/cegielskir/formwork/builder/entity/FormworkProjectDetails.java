@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class FormworkProjectDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -31,7 +31,13 @@ public class FormworkProjectDetails {
     @JoinColumn(name = "formwork_project_id")
     private FormworkProject formworkProject;
 
-    public FormworkProjectDetails() {}
+    public FormworkProjectDetails() {
+        this.upperExtraDistance = 0.3f;
+        this.distance = 2.0f;
+        this.overlapDistance = 0.2f;
+        this.oneUpperGirderDistance = 0.15f;
+        this.accuracy = 2;
+    }
 
     public FormworkProjectDetails(float upperExtraDistance, float distance, float overlapDistance,
                                   float oneUpperGirderDistance, int accuracy) {

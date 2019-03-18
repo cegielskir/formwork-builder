@@ -1,6 +1,8 @@
 package com.cegielskir.formwork.builder.entity;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -29,30 +31,24 @@ public class Formwork {
     @Column(name = "info")
     private String info;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "formwork",
                 cascade = {CascadeType.ALL})
     @Column(name = "rooms")
     private List<Room> rooms;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "formwork",
                 cascade = {CascadeType.ALL})
     @Column(name = "girder_sets")
     private List<GirderSet> girderSets;
 
-    @Column(name = "solution")
-    private String solution;
-
-    @Column(name = "is_solved")
-    private boolean isSolved;
-
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "formwork_project_id")
     private FormworkProject formworkProject;
 
     public Formwork() {
         this.createDate =  new Date(System.currentTimeMillis());
-        this.solution = null;
-        this.isSolved = false;
     }
 
     public Formwork(@NotNull String name) {
@@ -89,22 +85,6 @@ public class Formwork {
 
     public void setInfo(String info) {
         this.info = info;
-    }
-
-    public String getSolution() {
-        return solution;
-    }
-
-    public void setSolution(String solution) {
-        this.solution = solution;
-    }
-
-    public boolean isSolved() {
-        return isSolved;
-    }
-
-    public void setSolved(boolean solved) {
-        isSolved = solved;
     }
 
     public void addRoom(Room room){
@@ -167,8 +147,6 @@ public class Formwork {
                 ", info='" + info + '\'' +
                 ", rooms=" + rooms +
                 ", girderSets=" + girderSets +
-                ", solution=" + solution +
-                ", isSolved=" + isSolved +
                 '}';
     }
 }
