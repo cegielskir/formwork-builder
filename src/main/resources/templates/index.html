@@ -31,7 +31,7 @@
                 <td th:text="${#dates.format(tempFormwork.createDate, 'dd-MM-yyyy')}"></td>
                 <td th:text="${tempFormwork.info}"></td>
                 <td>
-                    <a th:href="@{'/formwork/details/'+${tempFormwork.id}}">Details</a>
+                    <a th:href="@{'~/formwork/details/'+${tempFormwork.id}}">Details</a>
                 </td>
                 <td>
                     <a th:href="@{/formwork/delete(formworkId=${tempFormwork.id})}">Delete</a>
@@ -40,27 +40,21 @@
                     <span th:if="${tempFormwork.getFormworkProject().getResultJSON() == null}">
                         NEVER CALCULATED
                     </span>
-                    <span th:if="${tempFormwork.getFormworkProject().getResultJSON() != null and
-                                    tempFormwork.getFormworkProject().getIsBetterSolutionAvailable() == true}">
-                        <a th:href="@{'/formwork/solution/'+${tempFormwork.id}}">BETTER SOLUTION</a>
+                    <span th:if="${tempFormwork.getFormworkProject().getResultJSON() != null}">
+                        <a th:href="@{'~/rest/formwork/get_result/'+${tempFormwork.id}}">SOLUTION</a>
                     </span>
-                    <span th:if="${tempFormwork.getFormworkProject().getIsBetterSolutionAvailable() == false and
-                                   tempFormwork.getFormworkProject().getResultJSON() != null}">
-                        <a th:href="@{'/formwork/solution/'+${tempFormwork.id}}">THE BEST SOLUTION</a>
-                    </span>
-
                 </td>
                 <td>
                     <span th:if="${tempFormwork.getFormworkProject().getResultJSON() == null}">
-                        <a th:href="@{'/formwork/compute/'+${tempFormwork.id}}">CALCULATE</a>
+                        <a th:href="@{'~/formwork/compute/'+${tempFormwork.id}}">CALCULATE</a>
                     </span>
                     <span th:if="${tempFormwork.getFormworkProject().getIsBetterSolutionCalculated() == true and
                                    tempFormwork.getFormworkProject().getResultJSON() != null}">
-                        <a th:href="@{'/formwork/compute/'+${tempFormwork.id}}">CALCULATE BETTER SOLUTION</a>
+                        <a th:href="@{'~/formwork/compute/'+${tempFormwork.id}}">CALCULATE BETTER SOLUTION</a>
                     </span>
                     <span th:if="${tempFormwork.getFormworkProject().getIsBetterSolutionAvailable() == false and
                                    tempFormwork.getFormworkProject().getResultJSON() != null}">
-                        <a th:href="@{'/formwork/compute/'+${tempFormwork.id}}">THE BEST SOLUTION CALCULATED</a>
+                        <a th:href="@{'~/formwork/compute/'+${tempFormwork.id}}">THE BEST SOLUTION CALCULATED</a>
                     </span>
                     <span th:if="${tempFormwork.getFormworkProject().getIsBetterSolutionCalculated() == false and
                                    tempFormwork.getFormworkProject().getResultJSON() != null}">
